@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: e-commerce-bot
+Version: 0.0.1
+Author: Soumya
+Requires-Dist: langchain_astradb
+Requires-Dist: langchain
+Dynamic: author
+Dynamic: requires-dist
