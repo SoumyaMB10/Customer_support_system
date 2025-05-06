@@ -1,3 +1,3 @@
-'''
-conda create -p venv -y 
-'''
+```
+ conda create -p venv -y 
+```
