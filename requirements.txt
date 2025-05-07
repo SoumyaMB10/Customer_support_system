@@ -4,6 +4,7 @@ langchain-community
 langchain_astradb
 langchain_core
 python-dotenv
+pandas
 
 
 -e . 
