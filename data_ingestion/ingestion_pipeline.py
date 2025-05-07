@@ -35,7 +35,7 @@ class DataIngestion:
         if missing_vars:
             raise EnvironmentError(f"Missing environment variables: {missing_vars}")
         
-        self.google_api_key = os.getenv("OPENAI_API_KEY")
+        self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.db_api_endpoint = os.getenv("ASTRA_DB_API_ENDPOINT")
         self.db_application_token = os.getenv("ASTRA_DB_APPLICATION_TOKEN")
         self.db_keyspace = os.getenv("ASTRA_DB_KEYSPACE")
