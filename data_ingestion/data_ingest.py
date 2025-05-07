@@ -16,7 +16,7 @@ class ingest_data:
     def __init__(self):
         print("data ingestion initiated....")
         self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
-        self.docs = data_converter.data_transfomation()
+        self.data_convert = data_converter()
 
     def data_ingestion(self, status):
         vstore = AstraDBVectorStore(embedding=self.embeddings,
@@ -26,7 +26,7 @@ class ingest_data:
                            namespace=os.environ["ASRA_DB_KEYSPACE"])
         storage = status
         if storage==None:
-            inserted_ids = vstore.add_documents(self.docs)
+            inserted_ids = vstore.add_documents(self.data_convert.data_transfomation())
             print(inserted_ids)
         else:
             return vstore
@@ -36,3 +36,8 @@ class ingest_data:
 ## to check if the current file is corect and working 
 if __name__ == '__main__':
     data_ingestion = ingest_data()
+    vstore, inserted_ids = data_ingestion.data_ingestion(None)
+    print(f"\nInserted {len(inserted_ids)} documents")
+    result = vstore.similarity_search("can you tell me the low budget headphone")
+    for res in result:
+        print(f"{res.page_content} {res.metadata}")
