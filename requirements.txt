@@ -5,6 +5,8 @@ langchain_astradb
 langchain_core
 python-dotenv
 pandas
+langchain_openai
+
 
 
 -e . 
