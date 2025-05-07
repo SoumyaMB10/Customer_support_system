@@ -1,0 +1,13 @@
+astra_db:
+  collection_name: "Chatbotecom"
+
+embedding_model:
+  provider: "OpenAI"
+  model_name: "text-embedding-3-large"
+
+retriever:
+  top_k: 3
+
+llm:
+  provider: "OpenAI"
+  model_name: "gpt-4o"

@@ -6,6 +6,11 @@ langchain_core
 python-dotenv
 pandas
 langchain_openai
+fastapi
+uvicorn
+python-multipart
+jinja2
+
 
 
 
