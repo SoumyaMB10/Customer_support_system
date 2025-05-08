@@ -4,6 +4,13 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from Retriever.retrieval import Retriever
+from utils.model_loader import ModelLoader
+from prompt_library.prompt import PROMPT_TEMPLATE
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -19,6 +26,31 @@ app.add_middleware(
     allow_headers = ["*"],
 )
 
+retriever_obj = Retriever()
+model_loader = ModelLoader()
+
 @app.get("/", response_class= HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("chat.html",{"request":request})
+
+
+def invoke_chain(query:str):
+    retriever = retriever_obj.load_retriever()
+    prompt = ChatPromptTemplate.from_template(PROMPT_TEMPLATE["product_bot"])
+    llm = model_loader.load_llm()
+
+
+    chain = (
+        {"context": retriever, "question": RunnablePassthrough()}
+        | prompt
+        | llm
+        | StrOutputParser()
+    )
+
+    output = chain.invoke(query)
+
+@app.post("/get", response_class= HTMLResponse)
+async def chat(msg:str= Form(...)):
+
+    result = invoke_chain(msg)
+    return result
