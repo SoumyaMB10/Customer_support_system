@@ -48,9 +48,11 @@ def invoke_chain(query:str):
     )
 
     output = chain.invoke(query)
+    return output
 
 @app.post("/get", response_class= HTMLResponse)
 async def chat(msg:str= Form(...)):
 
     result = invoke_chain(msg)
+    print(result)
     return result
