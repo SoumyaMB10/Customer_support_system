@@ -5,3 +5,7 @@
 ```
  conda activate ...{path}../venv
 ```
+
+```
+ uvicorn main:app --reload --port 8001
+```

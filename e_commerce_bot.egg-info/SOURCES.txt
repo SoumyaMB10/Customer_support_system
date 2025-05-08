@@ -4,8 +4,6 @@ Retriever/__init__.py
 Retriever/retrieval.py
 config/__init__.py
 config/config_loaders.py
-data_collection_pipeline/__init__.py
-data_collection_pipeline/flipcart_scarp.py
 data_ingestion/__init__.py
 data_ingestion/data_ingest.py
 data_ingestion/data_transform.py
